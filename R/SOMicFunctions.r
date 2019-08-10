@@ -12,6 +12,18 @@ with.dt = function(dt, expr){
   for (j in 1:length(expr)) set(dt, NULL, names(expr)[j], dt[, eval(expr[[j]])])
 }
 
+#' RothC temperature response function
+#'
+#' Calculates temperature rate modifier
+#'
+#' @param Temp Temperature in degrees C.
+#' @return temperature rate modifier.
+#' @author Dominic Woolf
+#' @export
+fT.RothC = function (Temp) {
+  ifelse(Temp >= -18.3, 47.9/(1 + exp(106/(Temp + 18.3))), 0)
+}
+
 fT.PrimC = function(temp, method = 'Century2', t.ref = 30){
   # function to calculate temperature dependence of decomposition rate
   switch(method,
@@ -20,6 +32,7 @@ fT.PrimC = function(temp, method = 'Century2', t.ref = 30){
     Century2 = fT.Century2(temp) * fT.RothC(t.ref) / fT.Century2(t.ref),
     stop('Unrecognised temperature function'))
 }
+
 
 wsat = function(sand, silt, clay) 0.6658*silt + 0.1567*sand - 0.0079*silt^2 - 12.31121/sand -
   6.4756*log(sand) - 0.0038*clay*silt + 0.0038*clay*sand - 0.0042*silt*sand + 52.7526
