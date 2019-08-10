@@ -24,6 +24,14 @@ fT.RothC = function (Temp) {
   ifelse(Temp >= -18.3, 47.9/(1 + exp(106/(Temp + 18.3))), 0)
 }
 
+#' PrimC temperature response function
+#'
+#' Calculates temperature rate modifier
+#'
+#' @param Temp Temperature in degrees C.
+#' @return temperature rate modifier.
+#' @author Dominic Woolf
+#' @export
 fT.PrimC = function(temp, method = 'Century2', t.ref = 30){
   # function to calculate temperature dependence of decomposition rate
   switch(method,
@@ -34,15 +42,55 @@ fT.PrimC = function(temp, method = 'Century2', t.ref = 30){
 }
 
 
+#' Estimate saturated water holding capacity
+#'
+#' Calculates saturation point
+#'
+#' @param Sand Sand in percent.
+#' @param Silt Silt in percent.
+#' @param Clay Clay in percent.
+#' @return saturated water holding capacity (m/m).
+#' @author Dominic Woolf
+#' @export
 wsat = function(sand, silt, clay) 0.6658*silt + 0.1567*sand - 0.0079*silt^2 - 12.31121/sand -
   6.4756*log(sand) - 0.0038*clay*silt + 0.0038*clay*sand - 0.0042*silt*sand + 52.7526
 
+#' Estimate field water holding capacity
+#'
+#' Calculates field capacity
+#'
+#' @param Sand Sand in percent.
+#' @param Silt Silt in percent.
+#' @param Clay Clay in percent.
+#' @return Field water holding capacity (m/m).
+#' @author Dominic Woolf
+#' @export
 wfield = function(sand, silt, clay) 118.932*clay + 119.0866*silt + 119.1104*sand + 162.31731/clay -
   46.21921/silt-5.12991/sand  + 18.1733*log(clay) + 0.0013*clay*silt + 0.0022*silt*sand - 11939.3493
 
+#' Estimate wilting point
+#'
+#' Calculates wilting point
+#'
+#' @param Sand Sand in percent.
+#' @param Silt Silt in percent.
+#' @param Clay Clay in percent.
+#' @return Wilting point (m/m).
+#' @author Dominic Woolf
+#' @export
 wwilt = function(sand, silt, clay) 92.3851 - 1.5722*silt - 0.5423*sand - 0.0072*clay^2 + 0.0072*silt^2 -
   0.0059*sand^2 + 160.14591/clay  +  6.60011/sand + 0.0022*clay*silt - 0.0039*clay*sand
 
+#' Convert rasters to 0 to 360 longitudes
+#'
+#' Provides the inverse function of raster::rotate
+#'
+#' @param Sand Sand in percent.
+#' @param Silt Silt in percent.
+#' @param Clay Clay in percent.
+#' @return Wilting point (m/m).
+#' @author Dominic Woolf
+#' @export
 unrotate = function(x) { # inverse of rotate: convert to 0 to 360 longitudes
   raster::shift(rotate(raster::shift(x, 180)), 180)
 }
