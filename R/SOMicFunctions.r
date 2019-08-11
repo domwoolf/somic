@@ -88,7 +88,7 @@ wwilt = function(sand, silt, clay) 92.3851 - 1.5722*silt - 0.5423*sand - 0.0072*
 #' @param Sand Sand in percent.
 #' @param Silt Silt in percent.
 #' @param Clay Clay in percent.
-#' @return Wilting point (m/m).
+#' @return Unrotated raster.
 #' @author Dominic Woolf
 #' @export
 unrotate = function(x) { # inverse of rotate: convert to 0 to 360 longitudes

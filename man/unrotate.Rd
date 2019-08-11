@@ -14,7 +14,7 @@ unrotate(x)
 \item{Clay}{Clay in percent.}
 }
 \value{
-Wilting point (m/m).
+Unrotated raster.
 }
 \description{
 Provides the inverse function of raster::rotate
