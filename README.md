@@ -1,4 +1,4 @@
-# somic1
+# somic
 
 Author Dominic Woolf (d.woolf@cornell.edu)
 
