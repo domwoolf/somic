@@ -280,7 +280,7 @@ initialise.daily.data <- function(soc.data) {
 #'
 #' @param soc.data A data frame.
 #'
-#' @return The data.frame but with more stuff filled in.
+#' @return A data.table but with more stuff filled in.
 #' \item{soc.data}{The data.frame but with more stuff filled in.}
 #' @author Dominic Woolf
 #' @note This is a very simple function.
