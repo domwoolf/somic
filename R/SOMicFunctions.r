@@ -189,41 +189,41 @@ Mode <- function(x, na.rm = FALSE) {
 
 #' Initialise Somic data
 #'
-#' Initialises model inputs
+#' Initialises model inputs by adding required columns to input data.frame using default values
 #'
-#' @param soc.data A data frame.
+#' @param soc.data A data frame that already has a time column.
 #'
-#' @return The data.frame but with more stuff filled in.
-#' \item{soc.data}{The data.frame but with more stuff filled in.}
+#' @return The data.table but with more stuff filled in.
+#' \item{soc.data}{The data.frame that already has a time column..}
 #' @author Dominic Woolf
 #' @note This is a very simple function.
 #' @rdname initialise.somic.data
 #' @export
-initialise.somic.data <- function(soc.data) {
-  # function to intialise values in soc dataframe
-  with.dt(soc.data, expression(
-    dpm = soc * 0.001,
-    rpm = soc * 0.081,
-    doc = 0.0,
-    bio = soc * 0.0331,
-    sta = soc * (1-0.001-0.081-0.0331),
-    atsmd = 0.0,
-    sat = 0.0,
-    h2o = 0.0,
-    a = fT.PrimC(temp, method = 'Century1', t.ref = 28),
-    c = ifelse (cover==0, 1, 0.6),
-    mic = 1,
-    added.doc = 0.0,
-    velocity = 0.0,
-    add_14c_age = 0.0,
-    dpm.d13c = soc.d13c,
-    rpm.d13c = soc.d13c,
-    doc.d13c = soc.d13c,
-    bio.d13c = soc.d13c,
-    sta.d13c = soc.d13c,
-    co2.d13c = 0.0
-  ))
-  soc.data
+initialise.somic.data <- function(soc.data, init.soc = 0.0, init.soc.d13c = 0.0, init.cover=1L) {
+  if (!is.data.table(soc.data)) setDT(soc.data)
+  if (!('soc' %in% names(soc.data)) soc.data[, soc := init.soc]
+  soc.data[, ipm := soc * 0.081]
+  soc.data[, spm := soc * 0.001]
+  soc.data[, doc := 0.0]
+  soc.data[, mb := soc * 0.0331]
+  soc.data[, mac := soc * (1-0.001-0.081-0.0331)]
+  soc.data[, atsmd := 0.0]
+  soc.data[, h2o := 0.0]
+  soc.data[, a := fT.PrimC(temp, method := 'Century1', t.ref := 28)]
+  if (!('cover' %in% names(soc.data)) soc.data[, cover := init.cover]
+  soc.data[, c := ifelse (cover==0, 1, 0.6)]
+  soc.data[, mic := 1]
+  soc.data[, added.doc := 0.0]
+  soc.data[, velocity := 0.0]
+  soc.data[, add_14c_age := 0.0]
+  if (!('soc.d13c' %in% names(soc.data)) soc.data[, soc.d13c := init.soc.d13c]
+  soc.data[, dpm.d13c := soc.d13c]
+  soc.data[, rpm.d13c := soc.d13c]
+  soc.data[, doc.d13c := soc.d13c]
+  soc.data[, bio.d13c := soc.d13c]
+  soc.data[, sta.d13c := soc.d13c]
+  soc.data[, co2.d13c := 0.0]
+  return(soc.data)
 }
 
 #' Initialise Somic data
