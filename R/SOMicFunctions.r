@@ -198,6 +198,8 @@ Mode <- function(x, na.rm = FALSE) {
 #' @author Dominic Woolf
 #' @note This is a very simple function.
 #' @rdname initialise.somic.data
+#' @import data.table
+#' @import SoilR
 #' @export
 initialise.somic.data <- function(soc.data, init.soc = 0.0, init.soc.d13c = 0.0, init.cover=1L) {
   if (!is.data.table(soc.data)) setDT(soc.data)
@@ -211,13 +213,17 @@ initialise.somic.data <- function(soc.data, init.soc = 0.0, init.soc.d13c = 0.0,
   soc.data[, doc := 0.0]
   soc.data[, mb := soc * 0.0331]
   soc.data[, mac := soc * (1-0.001-0.081-0.0331)]
+  if (!('added.spm' %in% names(soc.data))) soc_data[, added.spm := 0.0]
+  if (!('added.ipm' %in% names(soc.data))) soc_data[, added.ipm := 0.0]
+  if (!('added.doc' %in% names(soc.data))) soc_data[, added.doc := 0.0]
+  if (!('added.mb'  %in% names(soc.data))) soc_data[, added.mb  := 0.0]
+  if (!('added.mac' %in% names(soc.data))) soc_data[, added.mac := 0.0]
   soc.data[, atsmd := 0.0]
   soc.data[, h2o := 0.0]
   soc.data[, a := fT.PrimC(temp, method = 'Century1', t.ref = 28)]
   if (!('cover' %in% names(soc.data))) soc.data[, cover := init.cover]
   soc.data[, c := ifelse (cover==0, 1, 0.6)]
   soc.data[, mic := 1]
-  soc.data[, added.doc := 0.0]
   soc.data[, velocity := 0.0]
   soc.data[, add_14c_age := 0.0]
   if (!('soc.d13c' %in% names(soc.data))) soc.data[, soc.d13c := init.soc.d13c]

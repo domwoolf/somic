@@ -11,8 +11,6 @@ cdiff(x)
 }
 \arguments{
 \item{x}{A vector.}
-
-\item{x}{A vector.}
 }
 \value{
 The mode.

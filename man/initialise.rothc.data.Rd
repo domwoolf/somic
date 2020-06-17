@@ -10,14 +10,14 @@ initialise.rothc.data(soc.data)
 \item{soc.data}{A data frame.}
 }
 \value{
-The data.frame but with more stuff filled in.
+A data.table but with more stuff filled in.
 \item{soc.data}{The data.frame but with more stuff filled in.}
 }
 \description{
 Initialises model inputs
 }
 \note{
-This is a very simple function.
+This is a very simple function to intialise the data structure.
 }
 \author{
 Dominic Woolf

@@ -4,17 +4,22 @@
 \alias{initialise.somic.data}
 \title{Initialise Somic data}
 \usage{
-initialise.somic.data(soc.data)
+initialise.somic.data(
+  soc.data,
+  init.soc = 0,
+  init.soc.d13c = 0,
+  init.cover = 1L
+)
 }
 \arguments{
-\item{soc.data}{A data frame.}
+\item{soc.data}{A data frame that already has a time column.}
 }
 \value{
-The data.frame but with more stuff filled in.
-\item{soc.data}{The data.frame but with more stuff filled in.}
+The data.table but with more stuff filled in.
+\item{soc.data}{The data.frame that already has a time column..}
 }
 \description{
-Initialises model inputs
+Initialises model inputs by adding required columns to input data.frame using default values
 }
 \note{
 This is a very simple function.

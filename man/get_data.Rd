@@ -17,14 +17,6 @@ get_data(data_path)
 \item{full.names}{full names}
 
 \item{recursive}{look in subdirectories too?}
-
-\item{data_path}{Path to data.}
-
-\item{pattern}{filename pattern}
-
-\item{full.names}{full names}
-
-\item{recursive}{look in subdirectories too?}
 }
 \value{
 A data.frame for the somic model.
