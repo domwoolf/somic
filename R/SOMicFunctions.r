@@ -201,7 +201,11 @@ Mode <- function(x, na.rm = FALSE) {
 #' @export
 initialise.somic.data <- function(soc.data, init.soc = 0.0, init.soc.d13c = 0.0, init.cover=1L) {
   if (!is.data.table(soc.data)) setDT(soc.data)
-  if (!('soc' %in% names(soc.data)) soc.data[, soc := init.soc]
+  if (!('time' %in% names(soc.data))) stop('time column required')
+  if (!('temp' %in% names(soc.data))) stop('temp column required')
+  if (!('precip' %in% names(soc.data))) stop('precip column required')
+  if (!('pet' %in% names(soc.data))) stop('pet column required')
+  if (!('soc' %in% names(soc.data))) soc.data[, soc := init.soc]
   soc.data[, ipm := soc * 0.081]
   soc.data[, spm := soc * 0.001]
   soc.data[, doc := 0.0]
@@ -209,14 +213,14 @@ initialise.somic.data <- function(soc.data, init.soc = 0.0, init.soc.d13c = 0.0,
   soc.data[, mac := soc * (1-0.001-0.081-0.0331)]
   soc.data[, atsmd := 0.0]
   soc.data[, h2o := 0.0]
-  soc.data[, a := fT.PrimC(temp, method := 'Century1', t.ref := 28)]
-  if (!('cover' %in% names(soc.data)) soc.data[, cover := init.cover]
+  soc.data[, a := fT.PrimC(temp, method = 'Century1', t.ref = 28)]
+  if (!('cover' %in% names(soc.data))) soc.data[, cover := init.cover]
   soc.data[, c := ifelse (cover==0, 1, 0.6)]
   soc.data[, mic := 1]
   soc.data[, added.doc := 0.0]
   soc.data[, velocity := 0.0]
   soc.data[, add_14c_age := 0.0]
-  if (!('soc.d13c' %in% names(soc.data)) soc.data[, soc.d13c := init.soc.d13c]
+  if (!('soc.d13c' %in% names(soc.data))) soc.data[, soc.d13c := init.soc.d13c]
   soc.data[, dpm.d13c := soc.d13c]
   soc.data[, rpm.d13c := soc.d13c]
   soc.data[, doc.d13c := soc.d13c]
