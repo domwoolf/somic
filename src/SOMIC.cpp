@@ -49,6 +49,13 @@ double wmean (NumericVector vals, NumericVector wts){
   return(sv/sw);
 }
 
+//' Runs the SOMic model
+//'
+//' @param soc_data data.frame. See Details for required input columns.
+//' @param parameters: mic_vmax, mic_km, kdissolution, kdepoly, kdeath_and_exudates, kdesorb, ksorb, kmicrobial_uptake, cue_0, mcue, mclay, 
+//' @param more_parameters: thickness = 23.0, sat = 1.0, max_tsmd = 0.0, use_atsmd = 0, init_spm_14c_age = 0.0, init_ipm_14c_age = 0.0, init_doc_14c_age = 0.0, init_mb_14c_age = 0.0, init_mac_14c_age = 0.0, init_soc_14c_age
+//' @return data frame of SOC dynamics
+//' @export
 // [[Rcpp::export]]
 List somic(
     DataFrame soc_data,

@@ -226,6 +226,7 @@ initialise.somic.data <- function(soc.data, init.soc = 0.0, init.soc.d13c = -25.
   soc.data[, velocity := 0.0]
   soc.data[, add_14c_age := 0.0]
   if (!('soc.d13c' %in% names(soc.data))) soc.data[, soc.d13c := init.soc.d13c]
+  if (!('added.d13c' %in% names(soc.data))) soc.data[, added.d13c := init.soc.d13c]
   soc.data[, dpm.d13c := soc.d13c]
   soc.data[, rpm.d13c := soc.d13c]
   soc.data[, doc.d13c := soc.d13c]
