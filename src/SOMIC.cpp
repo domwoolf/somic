@@ -89,7 +89,6 @@ List somic(
   NumericVector add_mb = soc_data["added.mb"];
   NumericVector add_mac = soc_data["added.mac"];
   IntegerVector cover = soc_data["cover"];
-  NumericVector atsmd = soc_data["atsmd"];
   NumericVector temp = soc_data["temp"];
   NumericVector precip = soc_data["precip"];
   NumericVector pet = soc_data["pet"];
@@ -110,6 +109,7 @@ List somic(
   NumericVector spm_d13c(n), ipm_d13c(n), doc_d13c(n), mb_d13c(n), mac_d13c(n), co2_d13c(n);
   NumericVector spm_14c(n), ipm_14c(n), doc_14c(n), mb_14c(n), mac_14c(n), soc_14c(n);
   NumericVector leached_doc(n), leached_14C(n);
+  NumericVector atsmd(n);
   // New internal variables
   double clayfact = calc_clayfact(clay, mclay);
   double ksorb_altered, kmicrobial_uptake_altered, fsorb, fmic, kdoc;
