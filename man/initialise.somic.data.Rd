@@ -7,7 +7,7 @@
 initialise.somic.data(
   soc.data,
   init.soc = 0,
-  init.soc.d13c = 0,
+  init.soc.d13c = -25,
   init.cover = 1L
 )
 }
