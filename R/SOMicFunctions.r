@@ -201,18 +201,18 @@ Mode <- function(x, na.rm = FALSE) {
 #' @import data.table
 #' @import SoilR
 #' @export
-initialise.somic.data <- function(soc.data, init.soc = 0.0, init.soc.d13c = -25.0, init.cover=1L) {
+initialise.somic.data <- function(soc.data, init.soc = 10.0, init.soc.d13c = -25.0, init.cover=1L) {
   if (!is.data.table(soc.data)) setDT(soc.data)
   if (!('time' %in% names(soc.data))) stop('time column required')
   if (!('temp' %in% names(soc.data))) stop('temp column required')
   if (!('precip' %in% names(soc.data))) stop('precip column required')
   if (!('pet' %in% names(soc.data))) stop('pet column required')
   if (!('soc' %in% names(soc.data))) soc.data[, soc := init.soc]
-  soc.data[, ipm := soc * 0.081]
-  soc.data[, spm := soc * 0.001]
-  soc.data[, doc := 0.0]
-  soc.data[, mb := soc * 0.0331]
-  soc.data[, mac := soc * (1-0.001-0.081-0.0331)]
+  soc.data[, ipm := soc * 0.08]
+  soc.data[, spm := soc * 0.01]
+  soc.data[, doc := soc * 0.002]
+  soc.data[, mb  := soc * 0.033]
+  soc.data[, mac := soc - mb - doc - spm - ipm]
   if (!('added.spm' %in% names(soc.data))) soc.data[, added.spm := 0.0]
   if (!('added.ipm' %in% names(soc.data))) soc.data[, added.ipm := 0.0]
   if (!('added.doc' %in% names(soc.data))) soc.data[, added.doc := 0.0]
